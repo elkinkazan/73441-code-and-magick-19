@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
@@ -14,12 +14,11 @@ var INITIAL_X = 130;
 var TEXT_GAP = 10;
 var FONT_CTX = '16px PTMono';
 var COLOR_TEXT = '#000';
-var arr_height;
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
-}
+};
 
 var findMaxElement = function (arr) {
   var maxElement = arr[0];
@@ -29,7 +28,7 @@ var findMaxElement = function (arr) {
     }
   }
   return maxElement;
-}
+};
 
 window.renderStatistics = function (ctx, names, times) {
 
@@ -45,20 +44,19 @@ window.renderStatistics = function (ctx, names, times) {
 
   for (var i = 0; i < names.length; i++) {
 
-    arr_height = BAR_HEIGHT * Math.round(times[i]) / maxArrElement;
+    var arrHeight = BAR_HEIGHT * Math.round(times[i]) / maxArrElement;
 
-    if (names[i] == 'Вы') {
-    ctx.fillStyle = COLOR_USER;
+    if (names[i] === 'Вы') {
+      ctx.fillStyle = COLOR_USER;
     } else {
-    var valueSaturation = Math.floor(Math.random() * 100);
-    ctx.fillStyle = 'hsl(240,' + valueSaturation + '%, 50%)';
+      var valueSaturation = Math.floor(Math.random() * 100);
+      ctx.fillStyle = 'hsl(240,' + valueSaturation + '%, 50%)';
     }
 
-    ctx.fillRect(INITIAL_X, CLOUD_X + BAR_HEIGHT, BAR_WIDTH, -arr_height);
+    ctx.fillRect(INITIAL_X, CLOUD_X + BAR_HEIGHT, BAR_WIDTH, -arrHeight);
     ctx.fillStyle = COLOR_TEXT;
-    ctx.fillText(Math.round(times[i]), INITIAL_X, CLOUD_X + BAR_HEIGHT - arr_height - TEXT_GAP);
+    ctx.fillText(Math.round(times[i]), INITIAL_X, CLOUD_X + BAR_HEIGHT - arrHeight - TEXT_GAP);
     ctx.fillText(names[i], INITIAL_X, CLOUD_X + BAR_HEIGHT + 2 * TEXT_GAP);
     INITIAL_X = INITIAL_X + GAP;
-
   }
-}
+};

@@ -30,15 +30,15 @@ var findMaxElement = function (arr) {
   return maxElement;
 };
 
-var findValueSaturation = function () {
+var getRandomNumber = function () {
   return Math.floor(Math.random() * 100);
 };
 
-var findColor = function (name) {
+var getColor = function (name) {
   if (name === 'Вы') {
     return COLOR_USER;
   } else {
-    return 'hsl(240,' + findValueSaturation() + '%, 50%)';
+    return 'hsl(240,' + getRandomNumber() + '%, 50%)';
   }
 };
 
@@ -55,11 +55,17 @@ window.renderStatistics = function (ctx, names, times) {
   var maxArrElement = findMaxElement(times);
 
   for (var i = 0; i < names.length; i++) {
-    var arrHeight = BAR_HEIGHT * Math.round(times[i]) / maxArrElement;
-    ctx.fillStyle = findColor(names[i]);
-    ctx.fillRect(INITIAL_X + i * GAP + i * BAR_WIDTH, CLOUD_X + BAR_HEIGHT, BAR_WIDTH, -arrHeight);
+
+    var time = times[i];
+    var name = names[i];
+    var arrHeight = BAR_HEIGHT * Math.round(time) / maxArrElement;
+    var valueX = INITIAL_X + i * GAP + i * BAR_WIDTH;
+    var valueY = CLOUD_X + BAR_HEIGHT;
+
+    ctx.fillStyle = getColor(name);
+    ctx.fillRect(valueX, valueY, BAR_WIDTH, -arrHeight);
     ctx.fillStyle = COLOR_TEXT;
-    ctx.fillText(Math.round(times[i]), INITIAL_X + i * GAP + i * BAR_WIDTH, CLOUD_X + BAR_HEIGHT - arrHeight - TEXT_GAP);
-    ctx.fillText(names[i], INITIAL_X + i * GAP + i * BAR_WIDTH, CLOUD_X + BAR_HEIGHT + 20);
+    ctx.fillText(Math.round(time), valueX, valueY - arrHeight - TEXT_GAP);
+    ctx.fillText(name, valueX, valueY + 20);
   }
 };

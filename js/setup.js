@@ -5,6 +5,9 @@ var SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Валь
 var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var WIZARDS_LENGTH = 4;
+var CLASS_TO_REMOVE = 'hidden';
+var CLASS_NAME = '.setup';
+var API_ELEMENT = document;
 
 
 var getRandomInteger = function (max) {
@@ -16,7 +19,7 @@ var removeClass = function (apiElement, className, classToRemoveName) {
   queryName.classList.remove(classToRemoveName);
 };
 
-var checkColorsCoat = function (counter, arrCheck, coatColorLength) {
+var getCoatColor = function (counter, arrCheck, coatColorLength) {
   var randomColor = COAT_COLORS[getRandomInteger(coatColorLength)];
   var found = false;
   while (!found) {
@@ -34,7 +37,7 @@ var checkColorsCoat = function (counter, arrCheck, coatColorLength) {
 };
 
 
-var checkColorsEyes = function (counter, arrCheck, eyeColorLength) {
+var getEyesColor = function (counter, arrCheck, eyeColorLength) {
   var randomColor = EYES_COLORS[getRandomInteger(eyeColorLength)];
   var found = false;
   while (!found) {
@@ -61,8 +64,8 @@ var generateArrayOfWizards = function () {
   for (var i = 0; i < WIZARDS_LENGTH; i++) {
     arr[i] = {
       name: NAMES[getRandomInteger(namesLength)] + ' ' + SURNAMES[getRandomInteger(surnamesLength)],
-      coatColor: checkColorsCoat(i, arr, coatColorsLength),
-      eyesColor: checkColorsEyes(i, arr, eyesColorsLength)
+      coatColor: getCoatColor(i, arr, coatColorsLength),
+      eyesColor: getEyesColor(i, arr, eyesColorsLength)
     };
   }
   return arr;
@@ -89,8 +92,5 @@ var fillTemplate = function () {
   removeClass(similarList, '.setup-similar', 'hidden');
 };
 
-var CLASS_TO_REMOVE = 'hidden';
-var CLASS_NAME = '.setup';
-var API_ELEMENT = document;
 removeClass(API_ELEMENT, CLASS_NAME, CLASS_TO_REMOVE);
 fillTemplate();

@@ -16,6 +16,11 @@ var WIZARDS_COAT = SETUP_WIZARD.querySelector('.wizard-coat');
 var WIZARDS_EYES = SETUP_WIZARD.querySelector('.wizard-eyes');
 var FIREBALL = document.querySelector('.setup-fireball-wrap');
 var WIZARD_FORM = document.querySelector('.setup-wizard-form');
+var SETUP_OPEN = document.querySelector('.setup-open');
+var SETUP_CLOSE = document.querySelector('.setup-close');
+var USERNAME_INPUT = document.querySelector('.setup-user-name');
+var SETUP_FORM = document.querySelector('.setup-wizard-form');
+var SETUP_BUTTON = document.querySelector('.setup-submit');
 
 
 var getRandomInteger = function (max) {
@@ -47,10 +52,8 @@ var onSetupCloseClick = function () {
 };
 
 var onSetupFormKeydown = function (evt) {
-  if (!evt.target.matches('input')) {
-    if (evt.key === ESC_KEY) {
-      addClass(API_ELEMENT, CLASS_NAME, CLASS_TO_REMOVE);
-    }
+  if ((evt.key === ESC_KEY) && !(evt.target.matches('input'))) {
+    addClass(API_ELEMENT, CLASS_NAME, CLASS_TO_REMOVE);
   }
 };
 
@@ -174,20 +177,15 @@ var fillTemplate = function () {
   removeClass(similarList, '.setup-similar', 'hidden');
 };
 
-var setupOpen = document.querySelector('.setup-open');
-var setupClose = document.querySelector('.setup-close');
-var userNameInput = document.querySelector('.setup-user-name');
-var setupForm = document.querySelector('.setup-wizard-form');
-var setupButton = document.querySelector('.setup-submit');
 
-setupOpen.addEventListener('click', onSetupOpenClick);
-setupOpen.addEventListener('keydown', onSetupOpenKeydown);
-setupClose.addEventListener('click', onSetupCloseClick);
-setupClose.addEventListener('keydown', onSetupCloseKeydown);
-setupForm.addEventListener('keydown', onSetupFormKeydown);
-userNameInput.addEventListener('invalid', onInputInvalid);
-setupButton.addEventListener('click', onButtonClick);
-setupButton.addEventListener('keydown', onButtonKeydown);
+SETUP_OPEN.addEventListener('click', onSetupOpenClick);
+SETUP_OPEN.addEventListener('keydown', onSetupOpenKeydown);
+SETUP_CLOSE.addEventListener('click', onSetupCloseClick);
+SETUP_CLOSE.addEventListener('keydown', onSetupCloseKeydown);
+SETUP_FORM.addEventListener('keydown', onSetupFormKeydown);
+USERNAME_INPUT.addEventListener('invalid', onInputInvalid);
+SETUP_BUTTON.addEventListener('click', onButtonClick);
+SETUP_BUTTON.addEventListener('keydown', onButtonKeydown);
 WIZARDS_COAT.addEventListener('click', onCoatClick);
 WIZARDS_EYES.addEventListener('click', onEyesClick);
 FIREBALL.addEventListener('click', onFireballClick);

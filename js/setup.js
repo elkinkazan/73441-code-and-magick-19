@@ -73,10 +73,8 @@ var onInputInvalid = function (evt) {
 };
 
 var onButtonKeydown = function (evt) {
-  if (evt.target.matches('.setup-submit')) {
-    if (evt.key === ENTER_KEY) {
-      WIZARD_FORM.submit();
-    }
+  if ((evt.target.matches('.setup-submit')) && (evt.key === ENTER_KEY)) {
+    WIZARD_FORM.submit();
   }
 };
 
